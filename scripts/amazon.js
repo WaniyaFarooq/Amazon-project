@@ -43,12 +43,13 @@ productsHTML+=`
 
           <div class="product-spacer"></div>
 
-          <div class="added-to-cart">
+          <div class="added-to-cart js-added-to-cart">
             <img src="images/icons/checkmark.png">
             Added
           </div>
 
-          <button class="add-to-cart-button button-primary">
+          <button class="add-to-cart-button button-primary js-add-to-cart"
+          data-product-id="${product.id}">
             Add to Cart
           </button>
         </div>`
@@ -56,3 +57,25 @@ productsHTML+=`
 );
 
 document.querySelector('.js-products-grid').innerHTML = productsHTML;
+
+document.querySelectorAll('.js-add-to-cart')
+.forEach((btn)=>{
+  btn.addEventListener('click',() => {
+const productId = btn.dataset.productId;
+let match ;
+cart.forEach((item)=>{
+  if(productId === item.productId) {match = item;
+    return;
+  }
+});
+if(match) match.quantity++;
+else{
+cart.push(
+  {
+    productId : productId,
+    quantity: 1
+  });
+}
+
+  });
+});
