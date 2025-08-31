@@ -1,6 +1,8 @@
 //saving and structureing data
 
 //generate html
+
+import { cart } from "../data/cart";
 let productsHTML =``;
 products.forEach((product) =>{
 productsHTML+=`
