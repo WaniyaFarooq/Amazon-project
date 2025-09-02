@@ -13,7 +13,7 @@ cart =[
 ];
 };
 
-function saveToStorage(){
+export function saveToStorage(){
     localStorage.setItem('cart',JSON.stringify(cart));
 };
 
@@ -62,4 +62,18 @@ export function CalculateCartQuantity(){
       });
       return cartQuantity;
 
+}
+export function increaseQuantity(productId,quantity) {
+    let matchingItem;
+
+  cart.forEach((cartItem) => {
+    if (productId === cartItem.productId) {
+      matchingItem = cartItem;
+    }
+  });
+
+  matchingItem.quantity = quantity;
+
+  saveToStorage();
+  
 }
