@@ -1,25 +1,19 @@
 import { increaseQuantity, CalculateCartQuantity, cart, updateDeliveryOption, removeFromCart } from "../../data/cart.js";
-import { deliveryOptions } from "../../data/deliveryOptions.js";
-import { products } from "../../data/products.js";
+import { deliveryOptions,getDeliveryOption } from "../../data/deliveryOptions.js";
+import { products,getProduct } from "../../data/products.js";
 import formatCurrency from "../utils/money.js";
 import dayjs from "https://unpkg.com/supersimpledev@8.5.0/dayjs/esm/index.js";
+import {renderPaymentSummary} from './paymentSummary.js';
 export function renderOrderSummary() {
   let cartHTML = "";
   let matchingItem;
+  let deliveryOption;
   cart.forEach((cartItem) => {
-    const productId = cartItem.productId;
-    products.forEach((product) => {
-      if (product.id === productId) matchingItem = product;
+    
+    matchingItem = getProduct(cartItem.productId);
 
-    })
+    deliveryOption = getDeliveryOption(cartItem.deliveryOptionId);
 
-    const deliveryOptionId = cartItem.deliveryOptionId;
-    let deliveryOption;
-    deliveryOptions.forEach((Option) => {
-      if (deliveryOptionId === Option.id) {
-        deliveryOption = Option;
-      }
-    });
     const today = dayjs();
     const deliveryDate = today.add(deliveryOption.deliveryDays, 'days');
     const dateString = deliveryDate.format('dddd, MMMM D');
@@ -114,6 +108,7 @@ export function renderOrderSummary() {
       const container = document.querySelector(`.js-cart-item-container-${productId}`);
       container.remove();
       updateCartQuantity();
+     renderPaymentSummary();
 
     });
   });
@@ -135,6 +130,7 @@ export function renderOrderSummary() {
         `.js-cart-item-container-${productId}`
       );
       container.classList.add('is-editing-quantity');
+     renderPaymentSummary();
     })
   });
 
@@ -166,6 +162,7 @@ export function renderOrderSummary() {
       quantityLabel.innerHTML = updatedQuantity;
 
       updateCartQuantity();
+      renderPaymentSummary();
 
     });
     btn.addEventListener('keydown', (event) => {
@@ -181,6 +178,7 @@ export function renderOrderSummary() {
       const deliveryOptionId = opt.dataset.deliveryId;
       updateDeliveryOption(productId, deliveryOptionId);
       renderOrderSummary();
+      renderPaymentSummary();
     });
   });
 }
