@@ -5,19 +5,19 @@ import formatCurrency from "../scripts/utils/money.js";
 export const  deliveryOptions = [
     {
         id: '1',
-        delivaryDays:7,
+        deliveryDays:7,
         priceCents:0,
 
     },
      {
         id: '2',
-        delivaryDays:3,
+        deliveryDays:3,
         priceCents:499,
         
     },
     {
         id: '3',
-        delivaryDays:1,
+        deliveryDays:1,
         priceCents:999,
         
     }

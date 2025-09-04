@@ -80,3 +80,12 @@ export function increaseQuantity(productId,quantity) {
   saveToStorage();
   
 }
+
+export function updateDeliveryOption(productId,deliveryOptionId){
+  cart.forEach((product)=>{
+   if(product.productId === productId){
+    product.deliveryOptionId = deliveryOptionId;
+   } 
+  });
+saveToStorage();
+}
