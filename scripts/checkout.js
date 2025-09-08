@@ -5,4 +5,4 @@ import {renderCheckoutHeader} from './checkout/checkoutHeader.js';
 renderOrderSummary();
 renderPaymentSummary();
 renderCheckoutHeader();
-import  "../data/cart-class.js";
+// import  "../data/cart-class.js";
