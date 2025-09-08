@@ -1,5 +1,5 @@
 function Cart(localStorageKey){
-const cart ={
+const cart = {
 cartItems:undefined,
 
 loadFromStorage(){
