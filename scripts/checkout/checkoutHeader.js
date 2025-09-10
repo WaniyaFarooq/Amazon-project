@@ -1,7 +1,7 @@
-import { CalculateCartQuantity } from "../../data/cart.js";
+import { cart } from "../../data/cart-class.js";
 
 function updateCartQuantity() {
-  const cartQuantity = CalculateCartQuantity();
+  const cartQuantity = cart.CalculateCartQuantity();
   document.querySelector('.js-return-to-home-link')
     .innerHTML = `${cartQuantity} items`;
 }

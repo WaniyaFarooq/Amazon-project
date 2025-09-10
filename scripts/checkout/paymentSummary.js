@@ -1,4 +1,4 @@
-import { increaseQuantity, CalculateCartQuantity, cart, updateDeliveryOption, removeFromCart } from "../../data/cart.js";
+import { cart } from "../../data/cart-class.js";
 import { deliveryOptions,getDeliveryOption } from "../../data/deliveryOptions.js";
 import { products,getProduct } from "../../data/products.js";
 import formatCurrency from "../utils/money.js";
@@ -16,7 +16,7 @@ return (amount*percentage)/100;
 }
    
     
-        cart.forEach(element => {
+        cart.cartItems.forEach(element => {
            totalItems+=element.quantity;
            const matchingItem = getProduct(element.productId);
                 totalItemsCost+=element.quantity*matchingItem.priceCents;

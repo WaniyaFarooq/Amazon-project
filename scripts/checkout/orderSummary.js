@@ -1,4 +1,4 @@
-import { increaseQuantity, CalculateCartQuantity, cart, updateDeliveryOption, removeFromCart } from "../../data/cart.js";
+import { cart } from "../../data/cart-class.js";
 import { deliveryOptions,getDeliveryOption,calculateDeliveryDate } from "../../data/deliveryOptions.js";
 import { products,getProduct } from "../../data/products.js";
 import formatCurrency from "../utils/money.js";
@@ -9,7 +9,7 @@ export function renderOrderSummary() {
   let cartHTML = "";
   let matchingItem;
   let deliveryOption;
-  cart.forEach((cartItem) => {
+  cart.cartItems.forEach((cartItem) => {
     
     matchingItem = getProduct(cartItem.productId);
 
@@ -98,7 +98,7 @@ const dateString = calculateDeliveryDate(deliveryOption);
   deleteButtons.forEach((btn) => {
     btn.addEventListener('click', () => {
       const productId = btn.dataset.productId;
-      removeFromCart(productId);
+      cart.removeFromCart(productId);
 
     
      // updateCartQuantity();
@@ -138,7 +138,7 @@ const dateString = calculateDeliveryDate(deliveryOption);
         return;
       }
 
-      increaseQuantity(productId, updatedQuantity);
+      cart.increaseQuantity(productId, updatedQuantity);
       const container = document.querySelector(
         `.js-cart-item-container-${productId}`
       );
@@ -166,7 +166,7 @@ const dateString = calculateDeliveryDate(deliveryOption);
     opt.addEventListener('click', () => {
       const productId = opt.dataset.productId;
       const deliveryOptionId = opt.dataset.deliveryId;
-      updateDeliveryOption(productId, deliveryOptionId);
+      cart.updateDeliveryOption(productId, deliveryOptionId);
       renderOrderSummary();
       renderPaymentSummary();
     });
