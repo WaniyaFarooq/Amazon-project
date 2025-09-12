@@ -5,7 +5,13 @@
 import {   cart } from "../data/cart-class.js";
 import { products,loadProduct } from "../data/products.js";
 import { formatCurrency } from "./utils/money.js";
-loadProduct(renderProductGrid);
+new Promise((resolve)=>{
+  loadProduct(()=>{
+    resolve();
+  });
+}).then(()=>{
+  renderProductGrid();
+})
 
 function renderProductGrid(){
 let productsHTML = ``;
