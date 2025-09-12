@@ -3,19 +3,16 @@ import { renderOrderSummary } from "./checkout/orderSummary.js";
 import {renderCheckoutHeader} from './checkout/checkoutHeader.js';
  import { renderPaymentSummary } from "./checkout/paymentSummary.js";
 //  import '../data/backend-practice.js';
-import { loadProduct } from "../data/products.js";
+import { loadProduct,loadProductsFetch } from "../data/products.js";
 
 import { loadCart } from "../data/cart.js";
 
 Promise.all(
     [
-    new Promise((resolve)=>{
-    loadProduct(()=>{
-    resolve('w');
-    });
-}),
+    
+    loadProductsFetch(),
     new  Promise((resolve)=>{
-    loadCart (()=>{
+    loadCart(()=>{
     resolve('f');
 });
 })

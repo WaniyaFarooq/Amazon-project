@@ -51,6 +51,25 @@ constructor(productDetails){
    }
 
 }
+export function loadProductsFetch(){
+const Promise = fetch('https://supersimplebackend.dev/products') //automatic get
+//fetch send request to backened
+.then((response)=>{
+  return response.json() //is asynchronous u
+  // it returns a promise
+}).then((productsdata)=>{
+products = productsdata.map((productDetails)=>{
+  if(productDetails.type === 'clothing'){
+    return new Clothing(productDetails);
+  }
+  if(productDetails.type === 'Appliances'){
+    return new Appliances(productDetails);
+  }
+return new Product(productDetails);
+});
+});
+return Promise;
+};
 export let products = [];
 export function loadProduct(fun){
  const xhr = new XMLHttpRequest();
