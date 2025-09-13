@@ -7,24 +7,23 @@ import { loadProduct,loadProductsFetch } from "../data/products.js";
 
 import { loadCart } from "../data/cart.js";
 
-Promise.all(
-    [
-    
-    loadProductsFetch(),
-    new  Promise((resolve)=>{
-    loadCart(()=>{
-    resolve('f');
-});
-})
-    ]
-).then((val)=>{
-    console.log(val);
- renderOrderSummary();
-renderPaymentSummary();
-renderCheckoutHeader(); 
-});
+// Promise.all(
+//     [
+//     loadProductsFetch(),
+//     new  Promise((resolve)=>{
+//     loadCart(()=>{
+//     resolve('f');
+// });
+// })
+//     ]
+// ).then((val)=>{
+//     console.log(val);
+//  renderOrderSummary();
+// renderPaymentSummary();
+// renderCheckoutHeader(); 
+// });
 
-// new Promise((resolve )=>{
+// new Promise((resolve)=>{
 // loadProduct(()=>{
 
 //     resolve();
@@ -50,3 +49,17 @@ renderCheckoutHeader();
 
 // // // import  "../data/cart-class.js";
 // // 
+async function loadPage() {
+    
+    await loadProductsFetch();
+
+    await new  Promise((resolve)=>{
+     loadCart(()=>{
+     resolve();
+    });});
+
+    renderCheckoutHeader();
+    renderOrderSummary();
+    renderPaymentSummary();
+}
+loadPage();
