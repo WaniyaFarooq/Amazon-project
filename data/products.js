@@ -66,7 +66,9 @@ products = productsdata.map((productDetails)=>{
     return new Appliances(productDetails);
   }
 return new Product(productDetails);
-});
+})
+}).catch(()=>{
+  console.log("erorr!")
 });
 return Promise;
 };
@@ -87,7 +89,9 @@ return new Product(productDetails);
 fun();
  });
 
-
+xhr.addEventListener('error',(error)=>{
+  console.log("Unexpected error")
+});
  xhr.open('GET','https://supersimplebackend.dev/products');
  xhr.send();
 }

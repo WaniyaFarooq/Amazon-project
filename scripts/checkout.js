@@ -50,14 +50,20 @@ import { loadCart } from "../data/cart.js";
 // // // import  "../data/cart-class.js";
 // // 
 async function loadPage() {
-    
+    try{
     await loadProductsFetch();
 
-    await new  Promise((resolve)=>{
+    await new  Promise((resolve,reject)=>{
+     //   throw 'rtt';
      loadCart(()=>{
      resolve();
-    });});
 
+     //reject('error3')  //in future
+    });});
+    }
+    catch{
+        console.log("error");
+    }
     renderCheckoutHeader();
     renderOrderSummary();
     renderPaymentSummary();
