@@ -5,7 +5,7 @@ import {renderCheckoutHeader} from './checkout/checkoutHeader.js';
 //  import '../data/backend-practice.js';
 import { loadProduct,loadProductsFetch } from "../data/products.js";
 
-import { loadCart } from "../data/cart.js";
+import { loadCartFetch } from "../data/cart.js";
 
 // Promise.all(
 //     [
@@ -50,20 +50,13 @@ import { loadCart } from "../data/cart.js";
 // // // import  "../data/cart-class.js";
 // // 
 async function loadPage() {
-    try{
+    
     await loadProductsFetch();
 
-    await new  Promise((resolve,reject)=>{
-     //   throw 'rtt';
-     loadCart(()=>{
-     resolve();
+    await loadCartFetch();
 
      //reject('error3')  //in future
-    });});
-    }
-    catch{
-        console.log("error");
-    }
+    
     renderCheckoutHeader();
     renderOrderSummary();
     renderPaymentSummary();
